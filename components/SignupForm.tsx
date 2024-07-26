@@ -43,7 +43,7 @@ const SignupForm = () => {
       <div className="flex justify-center items-center">
         <p className="text-sm font-normal text-[#606060]">
           Already have an account?{" "}
-          <Link className="text-[#0054A1]" href="/">
+          <Link className="text-[#0054A1]" href="login">
             Log in.
           </Link>
         </p>

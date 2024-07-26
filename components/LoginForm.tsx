@@ -38,7 +38,7 @@ const LoginForm = () => {
       <div className="flex justify-center items-center">
         <p className="text-sm font-normal text-[#606060]">
           Don&apos;t have an account? Create a{" "}
-          <Link className="text-[#0054A1]" href="/signup">
+          <Link className="text-[#0054A1]" href="signup">
             new account.
           </Link>
         </p>
