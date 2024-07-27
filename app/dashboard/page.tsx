@@ -4,6 +4,7 @@ import InfoCard from "@/components/InfoCard";
 import InstallAppButton from "@/components/InstallAppButton";
 import Sidebar from "@/components/Sidebar";
 import TaskActions from "@/components/TaskActions";
+import TaskSections from "@/components/TaskSections";
 import UserActions from "@/components/UserActions";
 import Image from "next/image";
 
@@ -45,7 +46,7 @@ const Dashboard = () => {
         <CreateNewTaskButton />
         <InstallAppButton />
       </section>
-      <section className="col-span-10 border">
+      <section className="col-span-10 border space-y-3 p-3">
         <Greetings />
         <section className="grid grid-cols-3 gap-3">
           {infoData.map((x) => (
@@ -55,36 +56,7 @@ const Dashboard = () => {
         <section>
           <TaskActions />
         </section>
-        <section className="grid grid-cols-4 gap-3 bg-white">
-          <div className="">
-            <div className="flex justify-between items-center">
-              <h1 className="text-[#555555] font-normal text-base">To do</h1>
-              <Image src="/stairs.png" width={24} height={24} alt="" />
-            </div>
-          </div>
-          <div className="">
-            <div className="flex justify-between items-center">
-              <h1 className="text-[#555555] font-normal text-base">
-                In progress
-              </h1>
-              <Image src="/stairs.png" width={24} height={24} alt="" />
-            </div>
-          </div>
-          <div className="">
-            <div className="flex justify-between items-center">
-              <h1 className="text-[#555555] font-normal text-base">
-                Under review
-              </h1>
-              <Image src="/stairs.png" width={24} height={24} alt="" />
-            </div>
-          </div>
-          <div className="">
-            <div className="flex justify-between items-center">
-              <h1 className="text-[#555555] font-normal text-base">Finished</h1>
-              <Image src="/stairs.png" width={24} height={24} alt="" />
-            </div>
-          </div>
-        </section>
+        <TaskSections />
       </section>
     </main>
   );
