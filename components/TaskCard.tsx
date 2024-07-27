@@ -16,7 +16,7 @@ const TaskCard = () => {
         <Image src="/clock.png" alt="clock" width={24} height={24} />
         <p className="text-[#606060] font-semibold text-sm">2024-08-15</p>
       </div>
-      <div className="">
+      <div>
         <p className="text-[#797979] font-medium text-sm">1 hr ago</p>
       </div>
     </div>
