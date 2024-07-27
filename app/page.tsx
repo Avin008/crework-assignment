@@ -1,5 +1,12 @@
+"use client";
+import { useRouter } from "next/navigation";
+
 export default function Home() {
-  return (
-    <main className="flex min-h-screen items-center justify-center"></main>
-  );
+  const router = useRouter();
+  if (true) {
+    router.push("login");
+  } else {
+    router.push("/dashboard");
+  }
+  return null;
 }
