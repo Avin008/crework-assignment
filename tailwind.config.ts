@@ -13,6 +13,7 @@ const config: Config = {
         "form-gradient": "linear-gradient(to bottom, #F7F7F7, #F0F0F0)",
         "form-button": "linear-gradient(to bottom, #4C38C2, #2F2188)",
         "create-task-button": "linear-gradient(to bottom, #4C38C2, #2F2188)",
+        "add-task-button": "linear-gradient(to bottom, #3A3A3A, #202020)",
       },
     },
   },

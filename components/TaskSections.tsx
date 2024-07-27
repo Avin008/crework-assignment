@@ -1,5 +1,6 @@
 import Image from "next/image";
 import TaskCard from "./TaskCard";
+import AddTaskButton from "./AddTaskButton";
 
 const TaskSections = () => {
   return (
@@ -17,6 +18,7 @@ const TaskSections = () => {
         </div>
         <div className="">
           <TaskCard />
+          <AddTaskButton />
         </div>
       </div>
       <div className="">
