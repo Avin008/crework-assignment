@@ -1,4 +1,5 @@
 import Image from "next/image";
+import TaskCard from "./TaskCard";
 
 const TaskSections = () => {
   return (
@@ -13,6 +14,9 @@ const TaskSections = () => {
         <div className="flex justify-between items-center">
           <h1 className="text-[#555555] font-normal text-base">In progress</h1>
           <Image src="/stairs.png" width={24} height={24} alt="" />
+        </div>
+        <div className="">
+          <TaskCard />
         </div>
       </div>
       <div className="">
