@@ -39,14 +39,16 @@ const infoData: {
 
 const Dashboard = () => {
   return (
-    <main className="h-screen bg-[#f7f7f7] grid grid-cols-12 relative">
-      <section className="col-span-2 border space-y-3 bg-white">
-        <UserActions />
-        <Sidebar />
-        <CreateNewTaskButton />
-        <InstallAppButton />
+    <main className="min-h-screen bg-[#f7f7f7] grid grid-cols-12 relative">
+      <section className="col-span-2 border bg-white">
+        <div className="sticky top-3 h-[90%] space-y-3 p-2">
+          <UserActions />
+          <Sidebar />
+          <CreateNewTaskButton />
+          <InstallAppButton />
+        </div>
       </section>
-      <section className="col-span-10 border space-y-3 p-3">
+      <section className="col-span-10 border space-y-3 p-4">
         <Greetings />
         <section className="grid grid-cols-3 gap-3">
           {infoData.map((x) => (
