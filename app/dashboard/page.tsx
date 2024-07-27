@@ -3,7 +3,9 @@ import Greetings from "@/components/Greetings";
 import InfoCard from "@/components/InfoCard";
 import InstallAppButton from "@/components/InstallAppButton";
 import Sidebar from "@/components/Sidebar";
+import TaskActions from "@/components/TaskActions";
 import UserActions from "@/components/UserActions";
+import Image from "next/image";
 
 const infoData: {
   id: number;
@@ -49,6 +51,9 @@ const Dashboard = () => {
           {infoData.map((x) => (
             <InfoCard key={x.id} data={x} />
           ))}
+        </section>
+        <section>
+          <TaskActions />
         </section>
       </section>
     </main>
