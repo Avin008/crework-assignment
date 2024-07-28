@@ -1,4 +1,5 @@
 import CreateNewTaskButton from "@/components/CreateNewTaskButton";
+import CreatePostModal from "@/components/CreatePostModal";
 import Greetings from "@/components/Greetings";
 import InfoCard from "@/components/InfoCard";
 import InstallAppButton from "@/components/InstallAppButton";
