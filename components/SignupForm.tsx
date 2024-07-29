@@ -1,7 +1,69 @@
+"use client";
+import { useAuthStore } from "@/store/useAuthStore";
+import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
+import toast from "react-hot-toast";
+import { useMutation } from "react-query";
+
+type SignupCredentials = {
+  fullname: string;
+  email: string;
+  password: string;
+};
 
 const SignupForm = () => {
+  const [signupCredentials, setSignupCredentials] = useState<SignupCredentials>(
+    {
+      fullname: "",
+      email: "",
+      password: "",
+    }
+  );
+
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, []);
+
+  const inputHandler = (e: React.SyntheticEvent<HTMLInputElement>) => {
+    const { name, value } = e.currentTarget;
+    setSignupCredentials((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const router = useRouter();
+  const addAuth = useAuthStore((store) => store.addAuth);
+
+  const { isLoading, mutate } = useMutation(
+    async () => {
+      const res = await axios.post(
+        `${process.env.NEXT_PUBLIC_URL}/user/signup`,
+        signupCredentials
+      );
+      return res.data;
+    },
+    {
+      onSuccess: (res: {
+        data: { token: string; _id: string };
+        message: string;
+      }) => {
+        toast.success(res.message);
+        addAuth(res.data.token, res.data._id);
+        router.push("/feeds");
+      },
+      onError: (res: any) => {
+        toast.error(res.response.data.message);
+      },
+    }
+  );
   return (
     <div className="border rounded-2xl space-y-4 bg-form-gradient w-[35%] p-10 border-[#CECECE]">
       <div className="flex justify-center">
@@ -14,17 +76,33 @@ const SignupForm = () => {
           className="w-full bg-[#EBEBEB] outline-[#999999] p-2  h-10 rounded-lg"
           type="text"
           placeholder="Full name"
+          id="fullname"
+          name="fullname"
+          value={signupCredentials.fullname}
+          onChange={inputHandler}
+          ref={inputRef}
+          required
         />
         <input
           className="w-full bg-[#EBEBEB] outline-[#999999] p-2  h-10 rounded-lg"
           type="text"
           placeholder="Your email"
+          id="email"
+          name="email"
+          value={signupCredentials.email}
+          onChange={inputHandler}
+          required
         />
         <div className="relative">
           <input
             className="w-full bg-[#EBEBEB] outline-[#999999]  p-2 h-10 border rounded-lg"
             type="text"
             placeholder="Password"
+            id="password"
+            name="password"
+            value={signupCredentials.password}
+            onChange={inputHandler}
+            required
           />
           <div className="absolute right-2 hover:cursor-pointer top-0 bottom-0 flex items-center">
             <Image
@@ -36,7 +114,10 @@ const SignupForm = () => {
           </div>
         </div>
 
-        <button className="w-full h-10 border rounded-lg bg-form-button text-white">
+        <button
+          type="submit"
+          className="w-full h-10 border rounded-lg bg-form-button text-white"
+        >
           Sign up
         </button>
       </form>
