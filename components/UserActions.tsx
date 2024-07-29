@@ -1,7 +1,9 @@
+import { useAuthStore } from "@/store/useAuthStore";
 import Image from "next/image";
 import Link from "next/link";
 
 const UserActions = () => {
+  const removeAuth = useAuthStore((store) => store.removeAuth);
   return (
     <div className="h-[79px] space-y-2">
       <div className="flex items-center gap-2">
@@ -25,7 +27,10 @@ const UserActions = () => {
           </Link>
         </div>
         <div>
-          <button className="bg-[#F4F4F4] w-[69px] h-[40px] text-[#797979] font-normal rounded-md">
+          <button
+            onClick={removeAuth}
+            className="bg-[#F4F4F4] w-[69px] h-[40px] text-[#797979] font-normal rounded-md"
+          >
             Logout
           </button>
         </div>
