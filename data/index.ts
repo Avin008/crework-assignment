@@ -149,7 +149,7 @@ export const categories: Category[] = [
         id: "task4-3",
         title: "Email Verification",
         description: "Implement email verification for new user registrations.",
-        priority: "High",
+        priority: "Medium",
         timestamp: "2024-08-18T03:00:00Z",
       },
       {
@@ -163,7 +163,7 @@ export const categories: Category[] = [
         id: "task4-5",
         title: "Admin Login Monitoring",
         description: "Monitor and log admin login activities.",
-        priority: "High",
+        priority: "Urgent",
         timestamp: "2024-08-18T05:00:00Z",
       },
     ],
