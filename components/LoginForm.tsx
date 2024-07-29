@@ -54,7 +54,7 @@ const LoginForm = () => {
         console.log(res);
         addAuth(res.data.token, res.data._id);
         toast.success(res.message);
-        router.push("/feeds");
+        router.push("/dashboard");
       },
       onError: (error: any) => {
         toast.error(error.response.data.message);

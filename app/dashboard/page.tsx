@@ -1,3 +1,4 @@
+"use client";
 import CreateNewTaskButton from "@/components/CreateNewTaskButton";
 import CreatePostModal from "@/components/CreatePostModal";
 import Greetings from "@/components/Greetings";
@@ -8,9 +9,17 @@ import TaskActions from "@/components/TaskActions";
 import TaskSections from "@/components/TaskSections";
 import UserActions from "@/components/UserActions";
 import { infoData } from "@/data";
+import { useAuthStore } from "@/store/useAuthStore";
 import Image from "next/image";
+import { redirect } from "next/navigation";
 
 const Dashboard = () => {
+  const authStatus = useAuthStore((store) => store.authStatus);
+
+  if (!authStatus) {
+    redirect("/login");
+  }
+
   return (
     <main className="min-h-screen bg-[#f7f7f7] grid grid-cols-12 relative">
       <section className="col-span-2 border bg-white">

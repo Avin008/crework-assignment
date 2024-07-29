@@ -57,7 +57,7 @@ const SignupForm = () => {
       }) => {
         toast.success(res.message);
         addAuth(res.data.token, res.data._id);
-        router.push("/feeds");
+        router.push("/dashboard");
       },
       onError: (res: any) => {
         toast.error(res.response.data.message);
