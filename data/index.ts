@@ -169,3 +169,32 @@ export const categories: Category[] = [
     ],
   },
 ];
+
+export const infoData: {
+  id: number;
+  img: string;
+  title: string;
+  description: string;
+}[] = [
+  {
+    id: Date.now() + Math.random() * 1000,
+    img: "/illustration-1.png",
+    title: "Introducing tags",
+    description:
+      "Easily categorize and find your notes by adding tags. Keep your workspace clutter-free and efficient.",
+  },
+  {
+    id: Date.now() + Math.random() * 1000,
+    img: "/illustration-2.png",
+    title: "Share Notes Instantly",
+    description:
+      "Effortlessly share your notes with others via email or link. Enhance collaboration with quick sharing options.",
+  },
+  {
+    id: Date.now() + Math.random() * 1000,
+    img: "/illustration-3.png",
+    title: "Access Anywhere",
+    description:
+      "Sync your notes across all devices. Stay productive whether you're on your phone, tablet, or computer.",
+  },
+];
