@@ -64,6 +64,12 @@ const SignupForm = () => {
       },
     }
   );
+
+  const formHandler = (e: React.FormEvent) => {
+    e.preventDefault();
+    mutate();
+  };
+
   return (
     <div className="border rounded-2xl space-y-4 bg-form-gradient w-[35%] p-10 border-[#CECECE]">
       <div className="flex justify-center">
@@ -71,7 +77,7 @@ const SignupForm = () => {
           Welcome to <span className="text-[#4534AC]">Workflo!</span>
         </h1>
       </div>
-      <form className="space-y-3 mt-4">
+      <form className="space-y-3 mt-4" onSubmit={formHandler}>
         <input
           className="w-full bg-[#EBEBEB] outline-[#999999] p-2  h-10 rounded-lg"
           type="text"
@@ -96,8 +102,8 @@ const SignupForm = () => {
         <div className="relative">
           <input
             className="w-full bg-[#EBEBEB] outline-[#999999]  p-2 h-10 border rounded-lg"
-            type="text"
-            placeholder="Password"
+            type="password"
+            placeholder="password"
             id="password"
             name="password"
             value={signupCredentials.password}

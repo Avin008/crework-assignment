@@ -73,7 +73,7 @@ const LoginForm = () => {
           Welcome to <span className="text-[#4534AC]">Workflo!</span>
         </h1>
       </div>
-      <form className="space-y-3 mt-4">
+      <form className="space-y-3 mt-4" onSubmit={formHandler}>
         <input
           className="w-full bg-[#EBEBEB] outline-[#999999] p-2  h-10 rounded-lg"
           type="text"
