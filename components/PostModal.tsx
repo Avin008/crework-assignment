@@ -1,11 +1,13 @@
+import { useModalStore } from "@/store/useModalStore";
 import Image from "next/image";
 
 const PostModal = () => {
+  const closeModal = useModalStore((store) => store.closeModal);
   return (
     <div className="bg-white w-[40%] h-full py-2 px-3">
       <div className="flex justify-between items-center">
         <div className="flex gap-4">
-          <button>
+          <button onClick={closeModal}>
             <Image src="/close.png" alt="" width={24} height={24} />
           </button>
           <button>
