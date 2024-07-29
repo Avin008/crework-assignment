@@ -23,6 +23,8 @@ const SignupForm = () => {
     }
   );
 
+  const [showPassword, setShowPassword] = useState(false);
+
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -102,7 +104,7 @@ const SignupForm = () => {
         <div className="relative">
           <input
             className="w-full bg-[#EBEBEB] outline-[#999999]  p-2 h-10 border rounded-lg"
-            type="password"
+            type={showPassword ? "text" : "password"}
             placeholder="password"
             id="password"
             name="password"
@@ -110,7 +112,10 @@ const SignupForm = () => {
             onChange={inputHandler}
             required
           />
-          <div className="absolute right-2 hover:cursor-pointer top-0 bottom-0 flex items-center">
+          <div
+            onClick={() => setShowPassword((prev) => !prev)}
+            className="absolute right-2 hover:cursor-pointer top-0 bottom-0 flex items-center"
+          >
             <Image
               src="/eye-icon.png"
               width={20}
