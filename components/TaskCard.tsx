@@ -1,7 +1,12 @@
 import Image from "next/image";
 import { Task } from "./TaskSections";
+import { format, formatDistanceToNow } from "date-fns";
 
 const TaskCard = ({ task }: { task: Task }) => {
+  const timeStamp = new Date(task.timestamp);
+  const distanceTimeAgo = formatDistanceToNow(timeStamp, { addSuffix: true });
+  const formattedDate = format(timeStamp, "dd-MM-yyyy");
+
   return (
     <div className="bg-[#F9F9F9] p-2 space-y-2 rounded-lg border border-[#DEDEDE]">
       <h1 className="font-medium text-[#606060] text-base">{task.title}</h1>
@@ -11,14 +16,10 @@ const TaskCard = ({ task }: { task: Task }) => {
       </div>
       <div className="flex items-center gap-2">
         <Image src="/clock.png" alt="clock" width={24} height={24} />
-        <p className="text-[#606060] font-semibold text-sm">
-          {new Date(task.timestamp).getDate()}
-        </p>
+        <p className="text-[#606060] font-semibold text-sm">{formattedDate}</p>
       </div>
       <div>
-        <p className="text-[#797979] font-medium text-sm">
-          {new Date(task.timestamp).getTime()} hr ago
-        </p>
+        <p className="text-[#797979] font-medium text-sm">{distanceTimeAgo}</p>
       </div>
     </div>
   );
