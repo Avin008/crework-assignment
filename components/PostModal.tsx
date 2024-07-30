@@ -1,7 +1,11 @@
+import { useAuthStore } from "@/store/useAuthStore";
 import { useModalStore } from "@/store/useModalStore";
+import axios from "axios";
 import { format } from "date-fns";
 import Image from "next/image";
 import { ChangeEvent, useState } from "react";
+import toast from "react-hot-toast";
+import { useMutation } from "react-query";
 
 type PostDataType = {
   id: string;
@@ -15,6 +19,7 @@ type PostDataType = {
 
 const PostModal = () => {
   const closeModal = useModalStore((store) => store.closeModal);
+  const token = useAuthStore((store) => store.token);
 
   const [postData, setPostData] = useState<PostDataType>({
     id: "",
@@ -25,6 +30,25 @@ const PostModal = () => {
     priority: "High",
     postText: "",
   });
+
+  const { mutate } = useMutation(
+    async () => {
+      const res = await axios.post(
+        `${process.env.NEXT_PUBLIC_URL}/post/create`,
+        {
+          post: postData,
+          token: token,
+        }
+      );
+
+      return res;
+    },
+    {
+      onSuccess: () => {
+        toast.success("post created successfully");
+      },
+    }
+  );
 
   const postDataHandler = (
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
@@ -37,6 +61,7 @@ const PostModal = () => {
 
   const formHandler = (e: React.FormEvent) => {
     e.preventDefault();
+    mutate();
   };
 
   return (
