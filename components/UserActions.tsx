@@ -1,11 +1,19 @@
 import { useAuthStore } from "@/store/useAuthStore";
+import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
-const UserActions = () => {
+const UserActions = ({
+  profilePic,
+  fullname,
+}: {
+  profilePic: any;
+  fullname: string;
+}) => {
   const removeAuth = useAuthStore((store) => store.removeAuth);
   const { push } = useRouter();
+  const token = useAuthStore((store) => store.token);
 
   const handleAuthRedirect = () => {
     removeAuth();
@@ -16,10 +24,15 @@ const UserActions = () => {
     <div className="h-[79px] space-y-2">
       <div className="flex items-center gap-2">
         <div className="relative h-[31px] w-[31px]">
-          <Image className="object-contain" src="/dp.png" fill alt="" />
+          <Image
+            className="object-contain rounded-sm"
+            src={profilePic}
+            fill
+            alt=""
+          />
         </div>
         <div className="">
-          <p className="font-medium text-xl">Joe Gardener</p>
+          <p className="font-medium text-xl">{fullname}</p>
         </div>
       </div>
       <div className="flex justify-between items-center">
