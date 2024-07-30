@@ -4,7 +4,13 @@ import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { ItemType } from "@/data";
 
-const TaskCard = ({ task }: { task: ItemType | any }) => {
+const TaskCard = ({
+  task,
+  overlay = true,
+}: {
+  task: ItemType | any;
+  overlay?: boolean;
+}) => {
   const timeStamp = new Date(task.timestamp);
   const distanceTimeAgo = formatDistanceToNow(timeStamp, { addSuffix: true });
   const formattedDate = format(timeStamp, "dd-MM-yyyy");
@@ -32,8 +38,8 @@ const TaskCard = ({ task }: { task: ItemType | any }) => {
         transition,
         transform: CSS.Transform.toString(transform),
       }}
-      className={`bg-[#F9F9F9] ${
-        isDragging && "opacity-80"
+      className={`bg-[#F9F9F9] ${isDragging && "opacity-80"} ${
+        isDragging && overlay && "opacity-50"
       } p-2 space-y-2 rounded-lg border border-[#DEDEDE]`}
     >
       <h1 className="font-medium text-[#606060] text-base">{task.title}</h1>

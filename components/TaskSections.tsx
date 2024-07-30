@@ -43,7 +43,7 @@ const TaskSections = () => {
         ))}
         <DragOverlay>
           {activeId ? (
-            <TaskCard task={getItemById(activeId, containers)} />
+            <TaskCard overlay={true} task={getItemById(activeId, containers)} />
           ) : null}
         </DragOverlay>
       </DndContext>
