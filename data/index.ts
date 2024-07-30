@@ -1,10 +1,24 @@
-import { Category } from "@/components/TaskSections";
+import { UniqueIdentifier } from "@dnd-kit/core";
 
-export const categories: Category[] = [
+export type ItemType = {
+  id: UniqueIdentifier;
+  title: string;
+  description: string;
+  priority: "Low" | "Medium" | "High" | "Urgent";
+  timestamp: string;
+};
+
+export type CategoryType = {
+  id: UniqueIdentifier;
+  title: string;
+  items: ItemType[];
+};
+
+export const categories: CategoryType[] = [
   {
-    id: "1",
-    category: "To do",
-    tasks: [
+    id: crypto.randomUUID(),
+    title: "To do",
+    items: [
       {
         id: "task1-1",
         title: "Implement User Authentication",
@@ -46,8 +60,8 @@ export const categories: Category[] = [
   },
   {
     id: "2",
-    category: "In progress",
-    tasks: [
+    title: "In progress",
+    items: [
       {
         id: "task2-1",
         title: "Optimize Authentication",
@@ -88,8 +102,8 @@ export const categories: Category[] = [
   },
   {
     id: "3",
-    category: "Under review",
-    tasks: [
+    title: "Under review",
+    items: [
       {
         id: "task3-1",
         title: "Database Cleanup",
@@ -129,8 +143,8 @@ export const categories: Category[] = [
   },
   {
     id: "4",
-    category: "Finished",
-    tasks: [
+    title: "Finished",
+    items: [
       {
         id: "task4-1",
         title: "Implement Captcha",

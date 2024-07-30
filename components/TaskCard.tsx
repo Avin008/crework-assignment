@@ -1,14 +1,41 @@
 import Image from "next/image";
-import { Task } from "./TaskSections";
 import { format, formatDistanceToNow } from "date-fns";
+import { useSortable } from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
+import { ItemType } from "@/data";
 
-const TaskCard = ({ task }: { task: Task }) => {
+const TaskCard = ({ task }: { task: ItemType }) => {
   const timeStamp = new Date(task.timestamp);
   const distanceTimeAgo = formatDistanceToNow(timeStamp, { addSuffix: true });
   const formattedDate = format(timeStamp, "dd-MM-yyyy");
 
+  const {
+    setNodeRef,
+    attributes,
+    isDragging,
+    listeners,
+    transform,
+    transition,
+  } = useSortable({
+    id: task.id,
+    data: {
+      type: "item",
+    },
+  });
+
   return (
-    <div className="bg-[#F9F9F9] p-2 space-y-2 rounded-lg border border-[#DEDEDE]">
+    <div
+      ref={setNodeRef}
+      {...attributes}
+      {...listeners}
+      style={{
+        transition,
+        transform: CSS.Transform.toString(transform),
+      }}
+      className={`bg-[#F9F9F9] ${
+        isDragging && "opacity-80"
+      } p-2 space-y-2 rounded-lg border border-[#DEDEDE]`}
+    >
       <h1 className="font-medium text-[#606060] text-base">{task.title}</h1>
       <p className="text-[#797979]">{task.description}</p>
       <div

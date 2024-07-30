@@ -1,22 +1,28 @@
 import Image from "next/image";
 import TaskCard from "./TaskCard";
 import AddTaskButton from "./AddTaskButton";
-import { Category } from "./TaskSections";
+import { SortableContext } from "@dnd-kit/sortable";
+import { CategoryType } from "@/data";
 
-const CategoryColumn = ({ category }: { category: Category }) => {
+const CategoryColumn = ({ categoryData }: { categoryData: CategoryType }) => {
   return (
     <div>
       <div className="flex justify-between items-center">
         <h1 className="text-[#555555] font-normal text-base">
-          {category.category}
+          {categoryData.title}
         </h1>
         <Image src="/stairs.png" width={24} height={24} alt="" />
       </div>
       <div className="py-3 space-y-2">
-        {category.tasks.map((task) => (
-          <TaskCard key={task.id} task={task} />
-        ))}
-        <AddTaskButton />
+        <SortableContext
+          id={categoryData.id.toString()}
+          items={categoryData.items.map((x) => x.id)}
+        >
+          {categoryData.items.map((task) => (
+            <TaskCard key={task.id} task={task} />
+          ))}
+          <AddTaskButton />
+        </SortableContext>
       </div>
     </div>
   );

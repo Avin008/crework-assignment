@@ -1,29 +1,18 @@
-import Image from "next/image";
-import TaskCard from "./TaskCard";
-import AddTaskButton from "./AddTaskButton";
 import CategoryColumn from "./CategoryColumn";
-import { categories } from "@/data";
-
-export type Task = {
-  id: string;
-  title: string;
-  description: string;
-  priority: "High" | "Medium" | "Low" | "Urgent";
-  timestamp: string;
-};
-
-export type Category = {
-  id: string;
-  category: string;
-  tasks: Task[];
-};
+import { categories, CategoryType } from "@/data";
+import { closestCorners, DndContext } from "@dnd-kit/core";
+import { useState } from "react";
 
 const TaskSections = () => {
+  const [containers, setContainers] = useState<CategoryType[]>(categories);
+
   return (
     <section className="grid grid-cols-4 gap-3 rounded-lg p-3 bg-white">
-      {categories.map((category) => (
-        <CategoryColumn key={category.id} category={category} />
-      ))}
+      <DndContext collisionDetection={closestCorners}>
+        {containers.map((categoryData) => (
+          <CategoryColumn key={categoryData.id} categoryData={categoryData} />
+        ))}
+      </DndContext>
     </section>
   );
 };

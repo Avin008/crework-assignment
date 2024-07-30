@@ -4,7 +4,6 @@ import CreatePostModal from "@/components/CreatePostModal";
 import Greetings from "@/components/Greetings";
 import InfoCard from "@/components/InfoCard";
 import InstallAppButton from "@/components/InstallAppButton";
-import PostModal from "@/components/PostModal";
 import Sidebar from "@/components/Sidebar";
 import TaskActions from "@/components/TaskActions";
 import TaskSections from "@/components/TaskSections";
@@ -12,8 +11,6 @@ import UserActions from "@/components/UserActions";
 import { infoData } from "@/data";
 import { useAuthStore } from "@/store/useAuthStore";
 import { useModalStore } from "@/store/useModalStore";
-import Image from "next/image";
-import { redirect } from "next/navigation";
 
 const Dashboard = () => {
   const authStatus = useAuthStore((store) => store.authStatus);
