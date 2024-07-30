@@ -4,7 +4,7 @@ import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { ItemType } from "@/data";
 
-const TaskCard = ({ task }: { task: ItemType }) => {
+const TaskCard = ({ task }: { task: ItemType | any }) => {
   const timeStamp = new Date(task.timestamp);
   const distanceTimeAgo = formatDistanceToNow(timeStamp, { addSuffix: true });
   const formattedDate = format(timeStamp, "dd-MM-yyyy");
