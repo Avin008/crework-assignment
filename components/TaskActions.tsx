@@ -1,6 +1,9 @@
+"use client";
+import { useModalStore } from "@/store/useModalStore";
 import Image from "next/image";
 
 const TaskActions = () => {
+  const openModal = useModalStore((store) => store.openModal);
   return (
     <div className="flex items-center justify-between">
       <div className="flex relative items-center">
@@ -34,7 +37,10 @@ const TaskActions = () => {
           Share
           <Image src="/share.png" alt="" width={24} height={24} />
         </button>
-        <button className="font-normal flex items-center gap-2 bg-create-task-button text-white p-2 rounded-lg">
+        <button
+          onClick={openModal}
+          className="font-normal flex items-center gap-2 bg-create-task-button text-white p-2 rounded-lg"
+        >
           Create new
           <Image src="/add-task.png" alt="" width={24} height={24} />
         </button>

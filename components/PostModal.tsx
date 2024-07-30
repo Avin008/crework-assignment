@@ -40,7 +40,7 @@ const PostModal = () => {
   };
 
   return (
-    <div className="bg-white w-[40%] h-full py-2 px-3">
+    <div className="bg-white transform transition-transform duration-300 scale-95 w-[40%] h-full py-2 px-3">
       <form onSubmit={formHandler}>
         <div className="flex justify-between items-center">
           <div className="flex gap-4">
