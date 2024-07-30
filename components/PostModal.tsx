@@ -46,6 +46,7 @@ const PostModal = () => {
     {
       onSuccess: () => {
         toast.success("post created successfully");
+        closeModal();
       },
     }
   );
