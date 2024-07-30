@@ -1,8 +1,42 @@
 import { useModalStore } from "@/store/useModalStore";
+import { format } from "date-fns";
 import Image from "next/image";
+import { ChangeEvent, useState } from "react";
+
+type PostDataType = {
+  id: string;
+  title: string;
+  status: "To do" | "In progress" | "Under review" | "Finished";
+  priority: "Low" | "Medium" | "High" | "Urgent";
+  deadline: number;
+  description: string;
+  postText: string;
+};
 
 const PostModal = () => {
   const closeModal = useModalStore((store) => store.closeModal);
+
+  const [postData, setPostData] = useState<PostDataType>({
+    id: "",
+    title: "",
+    description: "",
+    status: "To do",
+    deadline: new Date().getTime(),
+    priority: "High",
+    postText: "",
+  });
+
+  const postDataHandler = (
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setPostData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  console.log(postData);
+
+  const formattedDate = format(postData.deadline, "yyyy-MM-dd");
+
   return (
     <div className="bg-white w-[40%] h-full py-2 px-3">
       <div className="flex justify-between items-center">
@@ -31,31 +65,44 @@ const PostModal = () => {
       </div>
       <form className="space-y-3">
         <input
+          name="title"
+          value={postData.title}
           className="h-[58px] w-full placeholder-shown:text-[48px] text-[48px] outline-none"
           type="text"
           placeholder="Title"
+          onChange={postDataHandler}
         />
         <div className="space-y-4">
           <div className="flex items-end gap-10">
             <label className="w-40 flex items-center gap-5" htmlFor="">
               <Image src="/status.png" alt="" width={24} height={24} /> Status
             </label>
-            <input
-              type="text"
-              className="outline-none"
-              placeholder="not selected"
-            />
+            <select
+              name="status"
+              value={postData.status}
+              onChange={postDataHandler}
+            >
+              <option value="To do">To do</option>
+              <option value="In Progress">In progress</option>
+              <option value="Under review">Under review</option>
+              <option value="Finished">Finished</option>
+            </select>
           </div>
           <div className="flex items-end gap-10">
             <label className="w-40 flex items-center gap-5" htmlFor="">
               <Image src="/priority.png" alt="" width={24} height={24} />{" "}
               Priority
             </label>
-            <input
-              type="text"
-              className="outline-none"
-              placeholder="not selected"
-            />
+            <select
+              name="priority"
+              onChange={postDataHandler}
+              value={postData.priority}
+            >
+              <option value="Low">Low</option>
+              <option value="Medium">Medium</option>
+              <option value="High">High</option>
+              <option value="Urgent">Urgent</option>
+            </select>
           </div>
           <div className="flex items-end gap-10">
             <label className="w-40 flex items-center gap-5" htmlFor="">
@@ -63,7 +110,10 @@ const PostModal = () => {
               Deadline
             </label>
             <input
-              type="text"
+              value={formattedDate}
+              onChange={postDataHandler}
+              name="deadline"
+              type="date"
               className="outline-none"
               placeholder="not selected"
             />
@@ -74,6 +124,9 @@ const PostModal = () => {
               Description
             </label>
             <input
+              name="description"
+              value={postData.description}
+              onChange={postDataHandler}
               type="text"
               className="outline-none"
               placeholder="not selected"
@@ -89,9 +142,10 @@ const PostModal = () => {
         <div className="">
           <textarea
             className="w-full border-t py-2 outline-none"
-            name=""
+            name="postText"
             placeholder="Start writing, or drag your own files here."
-            id=""
+            value={postData.postText}
+            onChange={postDataHandler}
           ></textarea>
         </div>
       </form>
