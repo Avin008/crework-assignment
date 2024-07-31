@@ -1,36 +1,101 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Task Management Application
 
-## Getting Started
+## ⚠️ **Important Note**
 
-First, run the development server:
+<span style="color:red">**Backend Deployment:** The backend for this application is deployed on the free tier of Render. Due to the nature of the free tier, the server spins down after a period of inactivity. As a result, the first request (such as sign-in or sign-up) after a period of inactivity can take up to **50 seconds** to respond while the server is waking up. Subsequent requests will be much faster.</span>
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Overview
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+This Task Management Application is designed to help users manage their tasks efficiently. It includes features like user authentication, a task board with multiple columns, task management functionalities, drag-and-drop capabilities, and data persistence to ensure a seamless user experience.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Features
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+1. **User Authentication**
 
-## Learn More
+   - Signup and login functionality using email and password.
+   - Secure password storage and user session management.
 
-To learn more about Next.js, take a look at the following resources:
+2. **Task Board**
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+   - Personalized task board for each user upon logging in.
+   - Four columns: "To-Do", "In Progress", "Under Review", and "Completed".
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+3. **Task Management**
 
-## Deploy on Vercel
+   - Create new tasks in any column.
+   - Each task includes:
+     - Title (mandatory)
+     - Description (optional)
+     - Status (mandatory, auto-filled based on the column)
+     - Priority (optional; values: Low, Medium, Urgent)
+     - Deadline (optional)
+   - Edit and delete tasks after creation.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+4. **Drag and Drop Functionality**
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+   - Move tasks between columns using drag-and-drop.
+   - Automatic status update when tasks are moved to a different column.
+
+5. **Data Persistence**
+   - Store all user data (account information and tasks) in a database.
+   - Ensure each user can only see and manage their own tasks.
+
+## Technologies Used
+
+- **Frontend**:
+  - **Next.js**: React framework for server-side rendering and static site generation.
+  - **Tailwind CSS**: Utility-first CSS framework for styling.
+  - **React Query**: Data fetching, caching, and synchronization for server state management.
+  - **Zustand**: State management library for managing global state.
+  - **dnd-kit**: Drag-and-drop toolkit for building draggable interfaces.
+- **Backend**: Node.js, Express
+- **Database**: MongoDB
+- **Authentication**: JWT (JSON Web Tokens)
+
+## Installation
+
+1. Clone the repository:
+
+   ```sh
+   git clone https://github.com/your-username/task-management-app.git
+   cd crework-assignment
+   ```
+
+2. Install dependencies:
+
+   ```sh
+   npm install
+   ```
+
+3. Set up environment variables:
+
+   - Create a `.env` file in the root directory.
+   - Add the following variables:
+     ```env
+     NEXT_PUBLIC_BACKEND_URL=your_backend_uri
+     ```
+
+4. Start the application:
+   ```sh
+   npm run dev
+   ```
+
+## Running the Project Locally
+
+When running the project locally, you might encounter a blank page due to Next.js caching. If this happens, please manually reload the page. This issue does not affect the production environment, where everything works smoothly.
+
+## Usage
+
+1. **Signup/Login**:
+
+   - Navigate to the signup page to create a new account.
+   - Login with your email and password.
+
+2. **Task Board**:
+
+   - After logging in, you will be directed to your task board.
+   - Create tasks by clicking the "Add Task" button in any column.
+   - Drag and drop tasks between columns to update their status.
+
+3. **Task Management**:
+   - Edit or delete tasks by clicking on the task and selecting the appropriate option.
