@@ -40,7 +40,7 @@ const LoginForm = () => {
   const router = useRouter();
   const addAuth = useAuthStore((store) => store.addAuth);
 
-  const { isLoading, mutate, data } = useMutation(
+  const { isLoading, mutate } = useMutation(
     async () => {
       const res = await axios.post(
         `${process.env.NEXT_PUBLIC_URL}/user/login`,
@@ -115,7 +115,7 @@ const LoginForm = () => {
           type="submit"
           className="w-full h-10 border rounded-lg bg-form-button text-white"
         >
-          Login
+          {isLoading ? "Please wait. it takes a while" : "Login"}
         </button>
       </form>
       <div className="flex justify-center items-center">

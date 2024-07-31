@@ -129,7 +129,7 @@ const SignupForm = () => {
           type="submit"
           className="w-full h-10 border rounded-lg bg-form-button text-white"
         >
-          Sign up
+          {isLoading ? "Please wait. it takes a while" : "Sign Up"}
         </button>
       </form>
       <div className="flex justify-center items-center">
