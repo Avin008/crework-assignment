@@ -26,7 +26,7 @@ const UserActions = ({
         <div className="relative h-[31px] w-[31px]">
           <Image
             className="object-contain rounded-sm"
-            src={profilePic}
+            src="/dp.png"
             fill
             alt=""
           />

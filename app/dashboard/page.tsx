@@ -27,7 +27,7 @@ const Dashboard = () => {
       return res.data;
     },
     {
-      enabled: false && token !== null,
+      enabled: token !== null,
     }
   );
 
