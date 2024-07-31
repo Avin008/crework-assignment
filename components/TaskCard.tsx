@@ -39,7 +39,7 @@ const TaskCard = ({
         transform: CSS.Transform.toString(transform),
       }}
       className={`bg-[#F9F9F9] ${isDragging && "opacity-80"} ${
-        isDragging && overlay && "opacity-50"
+        isDragging && overlay && "opacity-35"
       } p-2 space-y-2 rounded-lg border border-[#DEDEDE]`}
     >
       <h1 className="font-medium text-[#606060] text-base">{task.title}</h1>

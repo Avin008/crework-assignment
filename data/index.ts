@@ -16,7 +16,7 @@ export type CategoryType = {
 
 export const categories: CategoryType[] = [
   {
-    id: crypto.randomUUID(),
+    id: "1",
     title: "To do",
     items: [
       {

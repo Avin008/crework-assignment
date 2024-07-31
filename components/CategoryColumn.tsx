@@ -3,8 +3,10 @@ import TaskCard from "./TaskCard";
 import AddTaskButton from "./AddTaskButton";
 import { SortableContext } from "@dnd-kit/sortable";
 import { CategoryType } from "@/data";
+import { UniqueIdentifier, useDroppable } from "@dnd-kit/core";
 
 const CategoryColumn = ({ categoryData }: { categoryData: CategoryType }) => {
+  const { setNodeRef } = useDroppable({ id: categoryData.id });
   return (
     <div>
       <div className="flex justify-between items-center">
@@ -13,7 +15,7 @@ const CategoryColumn = ({ categoryData }: { categoryData: CategoryType }) => {
         </h1>
         <Image src="/stairs.png" width={24} height={24} alt="" />
       </div>
-      <div className="py-3 space-y-2">
+      <div className="py-3 space-y-2" ref={setNodeRef}>
         <SortableContext
           id={categoryData.id.toString()}
           items={categoryData.items.map((x) => x.id)}
