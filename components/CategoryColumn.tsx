@@ -5,7 +5,13 @@ import { SortableContext } from "@dnd-kit/sortable";
 import { CategoryType } from "@/data";
 import { UniqueIdentifier, useDroppable } from "@dnd-kit/core";
 
-const CategoryColumn = ({ categoryData }: { categoryData: CategoryType }) => {
+const CategoryColumn = ({
+  categoryData,
+  setPostData,
+}: {
+  categoryData: CategoryType;
+  setPostData: any;
+}) => {
   const { setNodeRef } = useDroppable({ id: categoryData.id });
   return (
     <div>
@@ -23,7 +29,10 @@ const CategoryColumn = ({ categoryData }: { categoryData: CategoryType }) => {
           {categoryData.items.map((task) => (
             <TaskCard key={task.id} task={task} />
           ))}
-          <AddTaskButton />
+          <AddTaskButton
+            category={categoryData.title}
+            setPostData={setPostData}
+          />
         </SortableContext>
       </div>
     </div>

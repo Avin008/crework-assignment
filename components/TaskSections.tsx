@@ -27,9 +27,11 @@ function getItemById(
 const TaskSections = ({
   containers,
   setContainers,
+  setPostData,
 }: {
   containers: CategoryType[];
   setContainers: any;
+  setPostData: any;
 }) => {
   const [activeId, setActiveId] = useState<null | UniqueIdentifier>(null);
 
@@ -79,7 +81,11 @@ const TaskSections = ({
         collisionDetection={closestCorners}
       >
         {containers?.map((categoryData) => (
-          <CategoryColumn key={categoryData.id} categoryData={categoryData} />
+          <CategoryColumn
+            key={categoryData.id}
+            categoryData={categoryData}
+            setPostData={setPostData}
+          />
         ))}
         <DragOverlay>
           {activeId ? (

@@ -45,6 +45,8 @@ const Dashboard = () => {
     postText: "",
   });
 
+  console.log(postData.status);
+
   const setContainerHandler = () => {
     setContainers((prev: any) =>
       prev.map((x: any) => {
@@ -118,7 +120,11 @@ const Dashboard = () => {
         <section>
           <TaskActions />
         </section>
-        <TaskSections containers={containers} setContainers={setContainers} />
+        <TaskSections
+          containers={containers}
+          setContainers={setContainers}
+          setPostData={setPostData}
+        />
       </section>
       {isModalOpen && (
         <CreatePostModal
