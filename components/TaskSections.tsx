@@ -9,9 +9,6 @@ import {
   UniqueIdentifier,
 } from "@dnd-kit/core";
 import TaskCard from "./TaskCard";
-import { useAuthStore } from "@/store/useAuthStore";
-import { useQuery } from "react-query";
-import axios from "axios";
 import { useState } from "react";
 
 function getItemById(
@@ -73,21 +70,6 @@ const TaskSections = ({
       })
     );
   };
-
-  const token = useAuthStore((store) => store.token);
-
-  const { data, isLoading } = useQuery(
-    ["posts"],
-    async () => {
-      const res = await axios.post(`${process.env.NEXT_PUBLIC_URL}/post`, {
-        token: token,
-      });
-      return res.data;
-    },
-    {
-      enabled: token !== null,
-    }
-  );
 
   return (
     <section className="grid grid-cols-4 gap-3 rounded-lg p-3 bg-white">

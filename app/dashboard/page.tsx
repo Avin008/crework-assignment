@@ -13,7 +13,7 @@ import { categories, CategoryType, infoData } from "@/data";
 import { useAuthStore } from "@/store/useAuthStore";
 import { useModalStore } from "@/store/useModalStore";
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 
 const Dashboard = () => {
@@ -62,6 +62,21 @@ const Dashboard = () => {
       })
     );
   };
+
+  const { data: categoryData, isLoading } = useQuery(
+    ["posts"],
+    async () => {
+      const postData = await axios.post(`${process.env.NEXT_PUBLIC_URL}/post`, {
+        token,
+      });
+      return postData.data?.posts;
+    },
+    { enabled: token !== null }
+  );
+
+  useEffect(() => {
+    setContainers(categoryData);
+  }, [isLoading]);
 
   return (
     <main className="min-h-screen bg-[#f7f7f7] grid grid-cols-12 relative">

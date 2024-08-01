@@ -1,5 +1,4 @@
 import { useAuthStore } from "@/store/useAuthStore";
-import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -13,7 +12,6 @@ const UserActions = ({
 }) => {
   const removeAuth = useAuthStore((store) => store.removeAuth);
   const { push } = useRouter();
-  const token = useAuthStore((store) => store.token);
 
   const handleAuthRedirect = () => {
     removeAuth();
@@ -26,7 +24,7 @@ const UserActions = ({
         <div className="relative h-[31px] w-[31px]">
           <Image
             className="object-contain rounded-sm"
-            src="/dp.png"
+            src={profilePic}
             fill
             alt=""
           />
