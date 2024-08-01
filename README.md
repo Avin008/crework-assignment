@@ -12,6 +12,8 @@
 2. Editing and deleting tasks.
 3. Creating tasks by clicking the "Add Task" button in any column.</span>
 
+<hr/>
+
 This Task Management Application is designed to help users manage their tasks efficiently. It includes features like user authentication, a task board with multiple columns, task management functionalities, drag-and-drop capabilities, and data persistence to ensure a seamless user experience.
 
 ## Features
