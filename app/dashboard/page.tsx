@@ -9,7 +9,7 @@ import Sidebar from "@/components/Sidebar";
 import TaskActions from "@/components/TaskActions";
 import TaskSections from "@/components/TaskSections";
 import UserActions from "@/components/UserActions";
-import { CategoryType, infoData } from "@/data";
+import { categories, CategoryType, infoData } from "@/data";
 import { useAuthStore } from "@/store/useAuthStore";
 import { useModalStore } from "@/store/useModalStore";
 import axios from "axios";
@@ -33,10 +33,10 @@ const Dashboard = () => {
     }
   );
 
-  const [containers, setContainers] = useState<CategoryType[]>([]);
+  const [containers, setContainers] = useState<CategoryType[]>(categories);
 
   const [postData, setPostData] = useState<PostDataType>({
-    id: "",
+    id: crypto.randomUUID(),
     title: "",
     description: "",
     status: "To do",

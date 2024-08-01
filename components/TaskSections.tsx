@@ -8,11 +8,11 @@ import {
   DragStartEvent,
   UniqueIdentifier,
 } from "@dnd-kit/core";
-import { useEffect, useState } from "react";
 import TaskCard from "./TaskCard";
 import { useAuthStore } from "@/store/useAuthStore";
 import { useQuery } from "react-query";
 import axios from "axios";
+import { useState } from "react";
 
 function getItemById(
   itemId: UniqueIdentifier,
@@ -34,7 +34,6 @@ const TaskSections = ({
   containers: CategoryType[];
   setContainers: any;
 }) => {
-  // const [containers, setContainers] = useState<CategoryType[]>([]);
   const [activeId, setActiveId] = useState<null | UniqueIdentifier>(null);
 
   const handleDragStart = (event: DragStartEvent) => {
@@ -51,8 +50,8 @@ const TaskSections = ({
 
     if (active.id === over?.id) return;
     if (activeContainerId === (overContainerId || emptyColumn)) return;
-    setContainers((prev: any) =>
-      prev.map((x: any) => {
+    setContainers((prev: CategoryType[]) =>
+      prev.map((x) => {
         if (x.id === (emptyColumn || overContainerId)) {
           return {
             ...x,
@@ -66,7 +65,7 @@ const TaskSections = ({
         } else if (x.id === activeContainerId) {
           return {
             ...x,
-            items: x.items.filter((t: any) => t.id !== active.id),
+            items: x.items.filter((t) => t.id !== active.id),
           };
         } else {
           return x;
@@ -90,12 +89,6 @@ const TaskSections = ({
     }
   );
 
-  useEffect(() => {
-    if (isLoading === false) {
-      setContainers(data?.data[0]?.category);
-    }
-  }, [isLoading, data]);
-
   return (
     <section className="grid grid-cols-4 gap-3 rounded-lg p-3 bg-white">
       <DndContext
@@ -103,10 +96,9 @@ const TaskSections = ({
         onDragEnd={handleDragEnd}
         collisionDetection={closestCorners}
       >
-        {!isLoading &&
-          containers?.map((categoryData) => (
-            <CategoryColumn key={categoryData.id} categoryData={categoryData} />
-          ))}
+        {containers?.map((categoryData) => (
+          <CategoryColumn key={categoryData.id} categoryData={categoryData} />
+        ))}
         <DragOverlay>
           {activeId ? (
             <TaskCard task={getItemById(activeId, containers)} />

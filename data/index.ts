@@ -1,5 +1,7 @@
+import { UniqueIdentifier } from "@dnd-kit/core";
+
 export type ItemType = {
-  id: String;
+  id: UniqueIdentifier;
   title: string;
   description: string;
   priority: "Low" | "Medium" | "High" | "Urgent";
@@ -8,7 +10,7 @@ export type ItemType = {
 };
 
 export type CategoryType = {
-  id: String;
+  id: UniqueIdentifier;
   title: string;
   items: ItemType[];
 };
