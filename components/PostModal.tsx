@@ -1,11 +1,9 @@
 import { useAuthStore } from "@/store/useAuthStore";
 import { useModalStore } from "@/store/useModalStore";
-import axios from "axios";
 import { format } from "date-fns";
 import Image from "next/image";
 import { ChangeEvent, useState } from "react";
 import toast from "react-hot-toast";
-import { useMutation } from "react-query";
 
 export type PostDataType = {
   id: string;
@@ -29,36 +27,6 @@ const PostModal = ({
   const closeModal = useModalStore((store) => store.closeModal);
   const token = useAuthStore((store) => store.token);
 
-  // const [postData, setPostData] = useState<PostDataType>({
-  //   id: "",
-  //   title: "",
-  //   description: "",
-  //   status: "To do",
-  //   deadline: new Date().getTime(),
-  //   priority: "High",
-  //   postText: "",
-  // });
-
-  // const { mutate } = useMutation(
-  //   async () => {
-  //     const res = await axios.post(
-  //       `${process.env.NEXT_PUBLIC_URL}/post/create`,
-  //       {
-  //         post: postData,
-  //         token: token,
-  //       }
-  //     );
-
-  //     return res;
-  //   },
-  //   {
-  //     onSuccess: () => {
-  //       toast.success("post created successfully");
-  //       closeModal();
-  //     },
-  //   }
-  // );
-
   const postDataHandler = (
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
   ) => {
@@ -74,7 +42,7 @@ const PostModal = ({
     closeModal();
     toast("task created successfully");
     setPostData({
-      id: "",
+      id: crypto.randomUUID(),
       title: "",
       description: "",
       status: "To do",

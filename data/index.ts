@@ -7,6 +7,8 @@ export type ItemType = {
   priority: "Low" | "Medium" | "High" | "Urgent";
   timestamp: Number;
   createdAt?: Number;
+  deadline?: Number;
+  postData?: string;
 };
 
 export type CategoryType = {
