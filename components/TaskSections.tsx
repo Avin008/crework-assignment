@@ -27,8 +27,14 @@ function getItemById(
   return null;
 }
 
-const TaskSections = () => {
-  const [containers, setContainers] = useState<CategoryType[]>([]);
+const TaskSections = ({
+  containers,
+  setContainers,
+}: {
+  containers: CategoryType[];
+  setContainers: any;
+}) => {
+  // const [containers, setContainers] = useState<CategoryType[]>([]);
   const [activeId, setActiveId] = useState<null | UniqueIdentifier>(null);
 
   const handleDragStart = (event: DragStartEvent) => {

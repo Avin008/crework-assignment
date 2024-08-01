@@ -4,14 +4,16 @@ import CreatePostModal from "@/components/CreatePostModal";
 import Greetings from "@/components/Greetings";
 import InfoCard from "@/components/InfoCard";
 import InstallAppButton from "@/components/InstallAppButton";
+import { PostDataType } from "@/components/PostModal";
 import Sidebar from "@/components/Sidebar";
 import TaskActions from "@/components/TaskActions";
 import TaskSections from "@/components/TaskSections";
 import UserActions from "@/components/UserActions";
-import { infoData } from "@/data";
+import { CategoryType, infoData } from "@/data";
 import { useAuthStore } from "@/store/useAuthStore";
 import { useModalStore } from "@/store/useModalStore";
 import axios from "axios";
+import { useState } from "react";
 import { useQuery } from "react-query";
 
 const Dashboard = () => {
@@ -30,6 +32,36 @@ const Dashboard = () => {
       enabled: token !== null,
     }
   );
+
+  const [containers, setContainers] = useState<CategoryType[]>([]);
+
+  const [postData, setPostData] = useState<PostDataType>({
+    id: "",
+    title: "",
+    description: "",
+    status: "To do",
+    deadline: new Date().getTime(),
+    priority: "High",
+    postText: "",
+  });
+
+  const setContainerHandler = () => {
+    setContainers((prev: any) =>
+      prev.map((x: any) => {
+        if (x.title === postData.status) {
+          return {
+            ...x,
+            items: [
+              { ...postData, timestamp: new Date().getTime() },
+              ...x.items,
+            ],
+          };
+        } else {
+          return x;
+        }
+      })
+    );
+  };
 
   return (
     <main className="min-h-screen bg-[#f7f7f7] grid grid-cols-12 relative">
@@ -54,9 +86,15 @@ const Dashboard = () => {
         <section>
           <TaskActions />
         </section>
-        <TaskSections />
+        <TaskSections containers={containers} setContainers={setContainers} />
       </section>
-      {isModalOpen && <CreatePostModal />}
+      {isModalOpen && (
+        <CreatePostModal
+          postData={postData}
+          setPostData={setPostData}
+          setContainerHandler={setContainerHandler}
+        />
+      )}
     </main>
   );
 };

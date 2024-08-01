@@ -7,7 +7,7 @@ import { ChangeEvent, useState } from "react";
 import toast from "react-hot-toast";
 import { useMutation } from "react-query";
 
-type PostDataType = {
+export type PostDataType = {
   id: string;
   title: string;
   status: "To do" | "In progress" | "Under review" | "Finished";
@@ -17,52 +17,71 @@ type PostDataType = {
   postText: string;
 };
 
-const PostModal = () => {
+const PostModal = ({
+  postData,
+  setPostData,
+  setContainerHandler,
+}: {
+  postData: PostDataType;
+  setPostData: any;
+  setContainerHandler: any;
+}) => {
   const closeModal = useModalStore((store) => store.closeModal);
   const token = useAuthStore((store) => store.token);
 
-  const [postData, setPostData] = useState<PostDataType>({
-    id: "",
-    title: "",
-    description: "",
-    status: "To do",
-    deadline: new Date().getTime(),
-    priority: "High",
-    postText: "",
-  });
+  // const [postData, setPostData] = useState<PostDataType>({
+  //   id: "",
+  //   title: "",
+  //   description: "",
+  //   status: "To do",
+  //   deadline: new Date().getTime(),
+  //   priority: "High",
+  //   postText: "",
+  // });
 
-  const { mutate } = useMutation(
-    async () => {
-      const res = await axios.post(
-        `${process.env.NEXT_PUBLIC_URL}/post/create`,
-        {
-          post: postData,
-          token: token,
-        }
-      );
+  // const { mutate } = useMutation(
+  //   async () => {
+  //     const res = await axios.post(
+  //       `${process.env.NEXT_PUBLIC_URL}/post/create`,
+  //       {
+  //         post: postData,
+  //         token: token,
+  //       }
+  //     );
 
-      return res;
-    },
-    {
-      onSuccess: () => {
-        toast.success("post created successfully");
-        closeModal();
-      },
-    }
-  );
+  //     return res;
+  //   },
+  //   {
+  //     onSuccess: () => {
+  //       toast.success("post created successfully");
+  //       closeModal();
+  //     },
+  //   }
+  // );
 
   const postDataHandler = (
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
-    setPostData((prev) => ({ ...prev, [name]: value }));
+    setPostData((prev: any) => ({ ...prev, [name]: value }));
   };
 
   const formattedDate = format(postData.deadline, "yyyy-MM-dd");
 
   const formHandler = (e: React.FormEvent) => {
     e.preventDefault();
-    mutate();
+    setContainerHandler();
+    closeModal();
+    toast("task created successfully");
+    setPostData({
+      id: "",
+      title: "",
+      description: "",
+      status: "To do",
+      deadline: new Date().getTime(),
+      priority: "High",
+      postText: "",
+    });
   };
 
   return (
@@ -116,7 +135,7 @@ const PostModal = () => {
                 onChange={postDataHandler}
               >
                 <option value="To do">To do</option>
-                <option value="In Progress">In progress</option>
+                <option value="In progress">In progress</option>
                 <option value="Under review">Under review</option>
                 <option value="Finished">Finished</option>
               </select>
