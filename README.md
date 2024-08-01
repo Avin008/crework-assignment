@@ -4,7 +4,9 @@
 
 <span style="color:red">**Backend Deployment:** The backend for this application is deployed on the free tier of Render. Due to the nature of the free tier, the server spins down after a period of inactivity. As a result, the first request (such as sign-in or sign-up) after a period of inactivity can take up to **50 seconds** to respond while the server is waking up. Subsequent requests will be much faster.</span>
 
-<span style="color:red">**Incomplete Features:** Please note that there are a few features that I am currently working on and will complete soon:
+## **Incomplete Features**
+
+<span style="color:red">Please note that there are a few features that I am currently working on and will complete soon:
 
 1. Creating new tasks.
 2. Editing and deleting tasks.
