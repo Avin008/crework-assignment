@@ -14,7 +14,7 @@ import { useAuthStore } from "@/store/useAuthStore";
 import { useModalStore } from "@/store/useModalStore";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useQuery } from "react-query";
+import { useMutation, useQuery } from "react-query";
 
 const Dashboard = () => {
   const isModalOpen = useModalStore((store) => store.isModalOpen);
@@ -33,7 +33,7 @@ const Dashboard = () => {
     }
   );
 
-  const [containers, setContainers] = useState<CategoryType[]>(categories);
+  const [containers, setContainers] = useState<CategoryType[]>([]);
 
   const [postData, setPostData] = useState<PostDataType>({
     id: crypto.randomUUID(),
@@ -74,9 +74,26 @@ const Dashboard = () => {
     { enabled: token !== null }
   );
 
+  const { mutate } = useMutation(async () => {
+    const postData = await axios.post(
+      `${process.env.NEXT_PUBLIC_URL}/post/create`,
+      {
+        token: token,
+        posts: containers,
+      }
+    );
+    return postData;
+  });
+
   useEffect(() => {
     setContainers(categoryData);
   }, [isLoading]);
+
+  useEffect(() => {
+    if (!isLoading && token !== null) {
+      mutate();
+    }
+  }, [isLoading, containers, token !== null]);
 
   return (
     <main className="min-h-screen bg-[#f7f7f7] grid grid-cols-12 relative">
