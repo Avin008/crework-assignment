@@ -1,5 +1,5 @@
 import CategoryColumn from "./CategoryColumn";
-import { categories, CategoryType, ItemType } from "@/data";
+import { CategoryType, ItemType } from "@/data";
 import {
   closestCorners,
   DndContext,
@@ -8,8 +8,11 @@ import {
   DragStartEvent,
   UniqueIdentifier,
 } from "@dnd-kit/core";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TaskCard from "./TaskCard";
+import { useAuthStore } from "@/store/useAuthStore";
+import { useQuery } from "react-query";
+import axios from "axios";
 
 function getItemById(
   itemId: UniqueIdentifier,
@@ -25,7 +28,7 @@ function getItemById(
 }
 
 const TaskSections = () => {
-  const [containers, setContainers] = useState<CategoryType[]>(categories);
+  const [containers, setContainers] = useState<CategoryType[]>([]);
   const [activeId, setActiveId] = useState<null | UniqueIdentifier>(null);
 
   const handleDragStart = (event: DragStartEvent) => {
@@ -66,6 +69,27 @@ const TaskSections = () => {
     );
   };
 
+  const token = useAuthStore((store) => store.token);
+
+  const { data, isLoading } = useQuery(
+    ["posts"],
+    async () => {
+      const res = await axios.post(`${process.env.NEXT_PUBLIC_URL}/post`, {
+        token: token,
+      });
+      return res.data;
+    },
+    {
+      enabled: token !== null,
+    }
+  );
+
+  useEffect(() => {
+    if (isLoading === false) {
+      setContainers(data?.data[0]?.category);
+    }
+  }, [isLoading, data]);
+
   return (
     <section className="grid grid-cols-4 gap-3 rounded-lg p-3 bg-white">
       <DndContext
@@ -73,9 +97,10 @@ const TaskSections = () => {
         onDragEnd={handleDragEnd}
         collisionDetection={closestCorners}
       >
-        {containers.map((categoryData) => (
-          <CategoryColumn key={categoryData.id} categoryData={categoryData} />
-        ))}
+        {!isLoading &&
+          containers?.map((categoryData) => (
+            <CategoryColumn key={categoryData.id} categoryData={categoryData} />
+          ))}
         <DragOverlay>
           {activeId ? (
             <TaskCard task={getItemById(activeId, containers)} />
