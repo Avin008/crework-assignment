@@ -8,9 +8,7 @@
 
 <span style="color:red">Please note that there are a few features that I am currently working on and will complete soon:
 
-1. Creating new tasks.
-2. Editing and deleting tasks.
-3. Creating tasks by clicking the "Add Task" button in any column.</span>
+1. Editing and deleting tasks.
 
 <hr/>
 
